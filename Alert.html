@@ -50,7 +50,11 @@ $.ajax({
 					var alertname = "NA";
 					if(str.includes('CPU Utilization Test')){
 						alertname = "High CPU Utilization";
-					} else if(str.includes('Memory Utiliuzation test')) {
+					}  
+					if(alarmFlag){
+						playMe(alertname);
+						}
+					if(str.includes('Memory Utiliuzation test')) {
 						alertname = "High Memory Utilization";
 					}
 					if(alarmFlag){
