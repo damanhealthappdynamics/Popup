@@ -46,12 +46,12 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('CPU Utilization Test') || str.includes('Shafafiya Pending Requests count High')){
+				if(str.includes('CPU Utilization Test') || str.includes('Memory Utilization Test')){
 					var alertname = "NA";
 					if(str.includes('CPU Utilization Test')){
-						alertname = "media/pend_prior_req_dhpo.mp3";
-					} else if(str.includes('Shafafiya Pending Requests count High')) {
-						alertname = "media/pend_prior_req_shafafiya.mp3";
+						alertname = "High CPU Utilization";
+					} else if(str.includes('Memory Utiliuzation test')) {
+						alertname = "High Memory Utilization";
 					}
 					if(alarmFlag){
 						playMe(alertname);
@@ -61,9 +61,9 @@ $.ajax({
 						console.log('alarmFlag = true');
 					}
 					//alert('Success!');
-					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' found');
+					console.log('Alert found');
 				} else {
-					console.log('Alert \'DHPO/Shafafiya Pending Requests High\' not found');
+					console.log('Alert not found');
 				}
             },
             error: function (error) {
@@ -74,7 +74,7 @@ $.ajax({
 function resetAlarmFlag(){
 	if(!alarmFlag){
 		alarmFlag = true;
-		console.log('resetAlarmFlag() -> alarmFlag = false');
+		console.log('resetAlarmFlag() -> alarmFlag = true');
 	} else {
 		console.log('resetAlarmFlag() -> alarmFlag = false');
 	}
