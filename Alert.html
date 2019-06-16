@@ -46,8 +46,8 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('CPU Utilization Test') || str.includes('Memory Utilization Test')){
-					var alertname = "NA";
+				//if(str.includes('CPU Utilization Test') || str.includes('Memory Utilization Test')){
+					//var alertname = "NA";
 					if(str.includes('CPU Utilization Test')){
 						alertname = "High CPU Utilization";
 					if(alarmFlag){
@@ -63,19 +63,19 @@ $.ajax({
 					if(alarmFlag){
 						alarmFlag = false;
 						console.log('alarmFlag = false');
+						console.log('Alert found');
 					}
 					 else {
 						console.log('alarmFlag = true');
+						 console.log('Alert not found');
 					}
 					//alert('Success!');
-					console.log('Alert found');
-				} else {
-					console.log('Alert not found');
-				}
+					
+				//} else {
+					
+				//}
             },
-            error: function (error) {
-                
-            }
+            error: function (error)
         });
 }
 function resetAlarmFlag(){
