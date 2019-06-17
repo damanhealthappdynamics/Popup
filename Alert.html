@@ -46,7 +46,7 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('CPU Utilization Test') || str.includes('Memory Utilization Test')){
+				if(str.includes('CPU Utilization Test') || str.includes('Memory Utilization test')){
 					var alertname = "NA";
 					if(str.includes('CPU Utilization Test')){
 						alertname = "High CPU Utilization";
