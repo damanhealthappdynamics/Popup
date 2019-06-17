@@ -82,6 +82,54 @@ $.ajax({
 	    }
         });
 }
+function checkHealthRule(){
+$.ajax({
+            url: 'https://cors-anywhere.herokuapp.com/https://damanhealth.saas.appdynamics.com/controller/rest/applications/7772/problems/healthrule-violations?time-range-type=BEFORE_NOW&duration-in-mins=2',
+            type: 'GET',
+            headers: {
+                //'Authorization': 'Basic YXBwZGwxQGRhbWFuaGVhbHRoOkFwcGRsMUAzMjE0',
+		    'Authorization': 'Bearer eyJraWQiOiIxIiwiYWxnIjoiSFMyNTYifQ.eyJpc3MiOiJBcHBEeW5hbWljcyIsImF1ZCI6IkFwcERfQVBJcyIsImV4cCI6MTU3ODM4ODY1NSwianRpIjoiYnQ5cGRBQmxZckxPNUhNcVVjcjR6QSIsImlhdCI6MTU0Njg1MjY1NSwibmJmIjoxNTQ2ODUyNTM1LCJzdWIiOiJnZXRoZWFsdGhydWxlcyIsInR5cGUiOiJBUElfQ0xJRU5UIiwiaWQiOiI4ZjU4YWUzMS02N2VmLTQ5ODQtYjY3OS04ODFjMGY1NDEwM2MiLCJhY2N0SWQiOiI0ODAzNTI4OS02ZTM1LTQ1MTItOTk2Yi04MWZhMzgzNTk5MDUiLCJhY2N0TmFtZSI6ImRhbWFuaGVhbHRoIn0.zLFHGXx334zES9M8yo5sdQ8PVSak-sy252HnyrlfcNo',
+				'X-Requested-With': 'XMLHttpRequest'
+            },
+            success: function (result) {
+                //CallBack(result);
+				var str = new XMLSerializer().serializeToString(result.documentElement);
+				if(str.includes('CPU utilization is too high') || str.includes('JVM Garbage Collection Time is too high') || str.includes('JVM Heap utilization is too high') || str.includes('Memory utilization is too high') || str.includes('Web Threds count is increasing')){
+					var alertname = "NA";
+					if(str.includes('CPU utilization is too high')){
+						alertname = "High CPU Utilization";
+					} else if(str.includes('JVM Garbage Collection Time is too high')) {
+						alertname = "JVM Garbage Collection Time is too high";
+					}
+					 else if(str.includes('JVM Garbage Collection Time is too high')) {
+						alertname = "JVM Garbage Collection Time is too high";
+					}
+					 else if(str.includes('JVM Heap utilization is too high')) {
+						alertname = "JVM Heap utilization is too high";
+					}
+					 else if(str.includes('Web Threds count is increasing')) {
+						alertname = "JVM Threds count is increasing";
+					}
+					if(alarmFlag){
+						playMe(alertname);
+						alarmFlag = false;
+						console.log('alarmFlag = false');
+					}
+					 else {
+						console.log('alarmFlag = true');
+					}
+					//alert('Success!');
+					
+				console.log('Alert found');
+				}
+				else {
+					console.log('Alert not found');
+				}
+   },
+            error: function (error){
+	    }
+        });
+}	
 function resetAlarmFlag(){
 	if(!alarmFlag){
 		alarmFlag = true;
