@@ -46,12 +46,21 @@ $.ajax({
             success: function (result) {
                 //CallBack(result);
 				var str = new XMLSerializer().serializeToString(result.documentElement);
-				if(str.includes('CPU Utilization Test') || str.includes('Memory Utilization test')){
+				if(str.includes('CPU utilization is too high') || str.includes('JVM Garbage Collection Time is too high') || str.includes('JVM Heap utilization is too high') || str.includes('Memory utilization is too high') || str.includes('Web Threds count is increasing')){
 					var alertname = "NA";
-					if(str.includes('CPU Utilization Test')){
+					if(str.includes('CPU utilization is too high')){
 						alertname = "High CPU Utilization";
-					} else if(str.includes('Memory Utilization test')) {
-						alertname = "High Memory Utilization";
+					} else if(str.includes('JVM Garbage Collection Time is too high')) {
+						alertname = "JVM Garbage Collection Time is too high";
+					}
+					 else if(str.includes('JVM Garbage Collection Time is too high')) {
+						alertname = "JVM Garbage Collection Time is too high";
+					}
+					 else if(str.includes('JVM Heap utilization is too high')) {
+						alertname = "JVM Heap utilization is too high";
+					}
+					 else if(str.includes('Web Threds count is increasing')) {
+						alertname = "JVM Threds count is increasing";
 					}
 					if(alarmFlag){
 						playMe(alertname);
